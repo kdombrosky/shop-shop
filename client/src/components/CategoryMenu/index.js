@@ -1,17 +1,22 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_CATEGORIES } from '../../utils/queries';
+
+// useStoreContext hook to retrieve current state from global state object
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../../utils/actions';
 
 function CategoryMenu() {
-  //retrieve current state from global state, and dispath method
+  // state = current state, dispatch = method to update state
   const [state, dispatch] = useStoreContext(); 
   // only need categories array from state, so destructure
   const { categories } = state;
-  //
+  // WHAT IS THIS V
   const { data: categoryData } = useQuery(QUERY_CATEGORIES);
 
+  // runs when it notices categoryData is not undefined anymore
+  // which is when the useQuery() hook returns
+  // runs on component load, and when some form of state changes in that component
   useEffect(() => {
     // if categoryData exists or has changed from the response of useQuery, then run dispatch()
     if (categoryData) {
@@ -23,6 +28,7 @@ function CategoryMenu() {
     }
   }, [categoryData, dispatch]);
 
+  // use click handler function in JSX below to update global state 
   const handleClick = id => {
     dispatch({
       type: UPDATE_CURRENT_CATEGORY,

@@ -5,7 +5,7 @@ import ProductItem from '../ProductItem';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 
-// import action and context Hook
+// import action and context Hook 
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 
@@ -23,12 +23,16 @@ function ProductList() {
   //     (product) => product.category._id === currentCategory
   //   );
   // }
+  
+  // state = current state, dispatch = method to update state
   const [state, dispatch] = useStoreContext();
-
+  // destructure currentCategory from state
   const { currentCategory } = state;
   
   const { loading, data } = useQuery(QUERY_PRODUCTS);
   
+  // runs when useQuery() hook returns
+  // runs on component load && when some form of state changes in this component 
   useEffect(() => {
     if (data) {
       dispatch({
