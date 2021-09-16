@@ -6,13 +6,16 @@ import { QUERY_CATEGORIES } from '../../utils/queries';
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../../utils/actions';
 
+// import idbPromise()
+import { idbPromise } from "../../utils/helpers";
+
 function CategoryMenu() {
   // state = current state, dispatch = method to update state
   const [state, dispatch] = useStoreContext(); 
   // only need categories array from state, so destructure
   const { categories } = state;
   // WHAT IS THIS V
-  const { data: categoryData } = useQuery(QUERY_CATEGORIES);
+  const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
   // runs when it notices categoryData is not undefined anymore
   // which is when the useQuery() hook returns
@@ -25,8 +28,19 @@ function CategoryMenu() {
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories
       });
+
+      categoryData.categories.forEach(category => {
+        idbPromise('categories', 'put', category);
+      });
+    } else if (!loading) {
+      idbPromise('categories', 'get').then(categories => {
+        dispatch({
+          type: UPDATE_CATEGORIES,
+          categories: categories
+        });
+      });
     }
-  }, [categoryData, dispatch]);
+  }, [categoryData, loading, dispatch]);
 
   // use click handler function in JSX below to update global state 
   const handleClick = id => {
