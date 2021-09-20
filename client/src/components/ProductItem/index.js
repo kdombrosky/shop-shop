@@ -4,13 +4,16 @@ import { pluralize } from "../../utils/helpers"
 import { idbPromise } from "../../utils/helpers";
 
 // import necessary hook and actions
-import { useStoreContext } from '../../utils/GlobalState';
+// import { useStoreContext } from '../../utils/GlobalState';
+import { useSelector, useDispatch } from 'react-redux';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 
 function ProductItem(item) {
-  const [state, dispatch] = useStoreContext();
+  // const [state, dispatch] = useStoreContext();
 
-  const { cart } = state;
+  // const { cart } = state;
+  const dispatch = useDispatch();
+  const cart = useSelector(state => state.cart);
 
   const addToCart = () => {
     // find the cart item with the matching id
@@ -32,6 +35,7 @@ function ProductItem(item) {
         type: ADD_TO_CART,
         product: { ...item, purchaseQuantity: 1 }
       });
+      // (...item) = item with all properties cheat 
       idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
     }
   };

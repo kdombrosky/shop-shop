@@ -1,37 +1,26 @@
 import React, { useEffect } from 'react';
-import { useQuery } from '@apollo/client';
-
 import ProductItem from '../ProductItem';
+import { useQuery } from '@apollo/client';
 import { QUERY_PRODUCTS } from '../../utils/queries';
+import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { idbPromise } from "../../utils/helpers";
 import spinner from '../../assets/spinner.gif';
 
-// import action and context Hook 
-import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
 
-// import idbPromise()
-import { idbPromise } from "../../utils/helpers";
+// import { useStoreContext } from '../../utils/GlobalState';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 function ProductList() {
-  // const { loading, data } = useQuery(QUERY_PRODUCTS);
-
-  // const products = data?.products || [];
-
-  // function filterProducts() {
-  //   if (!currentCategory) {
-  //     return products;
-  //   }
-
-  //   return products.filter(
-  //     (product) => product.category._id === currentCategory
-  //   );
-  // }
-  
   // state = current state, dispatch = method to update state
-  const [state, dispatch] = useStoreContext();
+  // const [state, dispatch] = useStoreContext();
   // destructure currentCategory from state
-  const { currentCategory } = state;
+  // const { currentCategory } = state;
   
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
+  const currentCategory = state.currentCategory;
+
   const { loading, data } = useQuery(QUERY_PRODUCTS);
   
   // runs when useQuery() hook returns

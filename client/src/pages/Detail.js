@@ -2,37 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import { QUERY_PRODUCTS } from '../utils/queries';
-import spinner from '../assets/spinner.gif';
-
-import { useStoreContext } from "../utils/GlobalState";
+import Cart from '../components/Cart';
 import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
   ADD_TO_CART,
   UPDATE_PRODUCTS,
 } from '../utils/actions';
-import Cart from '../components/Cart';
 
-// import idbPromise()
+import { QUERY_PRODUCTS } from '../utils/queries';
+import spinner from '../assets/spinner.gif';
 import { idbPromise } from "../utils/helpers";
+
+// import { useStoreContext } from "../utils/GlobalState";
+import { useSelector, useDispatch } from 'react-redux';
+
 
 // this is the Product Page! 
 function Detail() {
-  // const { id } = useParams();
+  // const [state, dispatch] = useStoreContext();
+  const state = useSelector(state => state);
+  const dispatch = useDispatch();
 
-  // const [currentProduct, setCurrentProduct] = useState({});
-
-  // const { loading, data } = useQuery(QUERY_PRODUCTS);
-
-  // const products = data?.products || [];
-
-  // useEffect(() => {
-  //   if (products.length) {
-  //     setCurrentProduct(products.find((product) => product._id === id));
-  //   }
-  // }, [products, id]);
-  const [state, dispatch] = useStoreContext();
   const { id } = useParams();
   
   const [currentProduct, setCurrentProduct] = useState({})
