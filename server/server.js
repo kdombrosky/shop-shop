@@ -23,7 +23,7 @@ app.use(express.json());
 app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
 // why is this in traversy video
-// const __dirname = path.resolve()
+const __dirname = path.resolve()
 
 // after npm i react-scripts, npm run build, serve build folder here:
 if (process.env.NODE_ENV === 'production') {
