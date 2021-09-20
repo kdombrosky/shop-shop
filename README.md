@@ -1,6 +1,6 @@
 # Shop-Shop 
 
-Link to site: 
+Link to site: https://glacial-lowlands-71277.herokuapp.com/
 <br/>
 
 ## Table of Contents 
@@ -15,7 +15,7 @@ The Shop-Shop is an e-commerce app that allows users to securely purchase their 
 
 
 ## Usage
-1. Navigate to the site [here](https://hidden-springs-87667.herokuapp.com/) for the first time 
+1. Navigate to the site [here](https://glacial-lowlands-71277.herokuapp.com/) for the first time 
 2. Sign up for an account and login to make purchases
 3. Add items to cart and checkout securely with Stripe!
 
