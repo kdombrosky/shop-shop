@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+// HIDE THIS IN DOTENV 
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
 
