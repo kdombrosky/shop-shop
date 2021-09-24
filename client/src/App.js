@@ -25,11 +25,12 @@ import Nav from './components/Nav';
 // import { StoreProvider } from "./utils/GlobalState";
 import OrderHistory from './pages/OrderHistory';
 
+// Link to GraphQL
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
-
+// what is this i forgot
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
   return {
@@ -40,6 +41,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+// and what is this
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
